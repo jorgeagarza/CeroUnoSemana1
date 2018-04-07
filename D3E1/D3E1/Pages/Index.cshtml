@@ -1,0 +1,54 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<div class="container" style="padding-top:15px;">
+
+    <div class="container">
+        @foreach (var item in Model.Todos)
+        {
+            <div class="col-md-4">
+                <div class="panel @((item.IsCompleted) ? "panel-success":"panel-default")">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <span>@item.Title</span>
+                            </div>
+                            <div class="col-xs-1">
+                                @if (!item.IsCompleted)
+                                {
+                                    <a asp-page="Index" asp-page-handler="Complete" asp-route-id="@item.Id"><i class="glyphicon glyphicon-ok"></i></a>
+                                }
+                            </div>
+                            <div class="col-xs-1">
+                                <a asp-page="Todo" asp-page-handler="Edit" asp-route-id="@item.Id"><i class="glyphicon glyphicon-edit"></i></a>
+                            </div>
+                            <div class="col-xs-1">
+                                <a asp-page="Index" asp-page-handler="Delete" asp-route-id="@item.Id"><i class="glyphicon glyphicon-trash"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        @item.Description
+                    </div>
+                    <div class="panel-footer">
+                        <label>Created: @item.CreatedAt.ToString("dd-MMM-yy hh:mm:ss tt")</label>
+                        @if (item.CompletedAt.HasValue && item.IsCompleted)
+                        {
+                            <label>Completed: @item.CompletedAt.Value.ToString("dd-MMM-yy hh:mm:ss tt")</label>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+                            </div>
+
+                            <div class="pull-right">
+                                <a asp-page="Todo" class="mdc-fab material-icons">
+                                    <i class="glyphicon glyphicon-plus "></i>
+                                </a>
+                            </div>
+                        </div>

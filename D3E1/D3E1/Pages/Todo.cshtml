@@ -1,0 +1,23 @@
+﻿@page
+@model D3E1.Pages.AddTodoModel
+@{
+    ViewData["Title"] = "Todo";
+}
+
+<h2>Todo</h2>
+
+<form method="post">
+    <input hidden asp-for="Todo.Id" />
+    <div class="form-group">
+        <label asp-for="Todo.Title"></label>
+        <input asp-for="Todo.Title" class="form-control" />
+        <span asp-validation-for="Todo.Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Todo.Description"></label>
+        <input asp-for="Todo.Description" class="form-control" />
+        <span asp-validation-for="Todo.Description" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
